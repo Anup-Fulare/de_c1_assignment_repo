@@ -1,0 +1,21 @@
+# DE C1 Medallion Pipeline — Cursor project rules
+
+## Architecture
+- Follow Bronze → Silver → Gold → Dashboard (medallion). Do not mix layer responsibilities.
+- Bronze: raw ingest only. No cleaning, no dropping rows, no business transforms.
+- Silver: data quality checks. FLAG bad rows; never silently delete them.
+- Gold: analytics aggregations only, from Silver with documented row filters.
+- Dashboard queries read Gold tables only.
+
+## Security
+- Never include secrets, API keys, passwords, tokens, or real customer PII.
+- Use synthetic sample data only.
+
+## Code
+- Prefer readable, commented Python / PySpark / SQL.
+- Keep Databricks Community Edition in mind (simple paths, no proprietary extras).
+- Match filenames and schemas in ASSIGNMENT_PLAN.md / design docs.
+
+## AI workflow
+- Document meaningful Cursor exchanges in ai-prompts/ (prompt, response summary, accepted/changed/rejected).
+- Do not invent prompt history after the fact.

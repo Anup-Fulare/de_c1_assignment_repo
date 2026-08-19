@@ -1,0 +1,2 @@
+-- Gold: sales by product
+-- Skeleton — implement in Prompt 18.

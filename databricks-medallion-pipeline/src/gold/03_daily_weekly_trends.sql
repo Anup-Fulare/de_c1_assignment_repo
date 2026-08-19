@@ -1,0 +1,2 @@
+-- Gold: daily / weekly trends
+-- Skeleton — implement in Prompt 18.

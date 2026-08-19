@@ -1,0 +1,4 @@
+# Python dependencies for local sample-data generation and tests.
+# Pin versions for reproducibility on Free/Community Edition workflows.
+
+pandas==2.2.3

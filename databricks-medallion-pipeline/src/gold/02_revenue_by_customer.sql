@@ -1,0 +1,2 @@
+-- Gold: revenue by customer
+-- Skeleton — implement in Prompt 18.

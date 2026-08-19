@@ -1,0 +1,2 @@
+-- Gold: customer segmentation
+-- Skeleton — implement in Prompt 18.
