@@ -31,19 +31,9 @@ def _dbfs_path(path: str) -> str:
 
 
 def validate_source(spark: SparkSession, source_path: str) -> str:
+    """Validate source path - Spark Connect compatible (no dbutils)."""
     path = _dbfs_path(source_path)
-    try:
-        from pyspark.dbutils import DBUtils  # type: ignore
-
-        dbutils = DBUtils(spark)
-        fs_path = path.replace("dbfs:", "")
-        listing = dbutils.fs.ls(fs_path if fs_path.startswith("/") else f"/{fs_path}")
-        if not listing:
-            raise FileNotFoundError(f"Source path is empty: {path}")
-    except ImportError:
-        pass
-    except Exception as exc:
-        raise FileNotFoundError(f"Source path missing or inaccessible: {path}") from exc
+    # Skip file validation on Spark Connect - DataFrame load will fail if missing
     return path
 
 
@@ -79,7 +69,8 @@ def ingest_orders(
         .load(path)
     )
 
-    if df.rdd.isEmpty():
+    # Check for empty dataframe - Spark Connect compatible
+    if df.limit(1).count() == 0:
         raise ValueError(f"No rows found at {path}")
 
     bronze_df = (
@@ -109,16 +100,28 @@ def ingest_orders(
 
 
 def main() -> None:
+    """Main entry point - auto-detects user path for portability."""
     spark = get_spark()
+    
+    # Auto-detect user and repository location
     try:
-        dbutils.widgets.text(  # type: ignore[name-defined]
-            "source_path",
-            "/FileStore/medallion_pipeline/data/orders.csv",
-            "Orders CSV path",
-        )
+        from pyspark.dbutils import DBUtils  # type: ignore
+        dbutils = DBUtils(spark)
+        current_user = dbutils.notebook.entry_point.getDbutils().notebook().getContext().userName().get()
+        repo_root = f"/Workspace/Users/{current_user}/ttn_de_c1_assignment_repo_sync/databricks-medallion-pipeline"
+        source_path = f"{repo_root}/data/orders.csv"
+    except Exception:
+        # Fallback for non-notebook execution
+        import os
+        repo_root = os.getenv("REPO_ROOT", "/Workspace/Users/default/ttn_de_c1_assignment_repo_sync/databricks-medallion-pipeline")
+        source_path = f"{repo_root}/data/orders.csv"
+    
+    # Allow override via widget if in notebook
+    try:
+        dbutils.widgets.text("source_path", source_path, "Orders CSV path")  # type: ignore[name-defined]
         source_path = dbutils.widgets.get("source_path")  # type: ignore[name-defined]
     except Exception:
-        source_path = "/FileStore/medallion_pipeline/data/orders.csv"
+        pass
 
     ingest_orders(spark, source_path)
 
