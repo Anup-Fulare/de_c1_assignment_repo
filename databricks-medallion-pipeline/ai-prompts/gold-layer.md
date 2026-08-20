@@ -44,3 +44,24 @@ Orchestrator reads the four `.sql` files, `CREATE DATABASE IF NOT EXISTS gold`, 
 
 **FINAL DECISION:** Run on Databricks after Silver; then Prompt 20 consolidates gold logs.
 
+---
+
+## Prompt 3: Consolidate Prompt 18–19 log (playbook Prompt 20)
+
+**PROMPT SENT:**
+
+Append Prompt 18–19 into `ai-prompts/gold-layer.md`. Extra notes: Gold passed on Databricks Free/Community Edition (`create_gold_tables.py` + four gold tables).
+
+**AI RESPONSE SUMMARY:**
+
+Entries for Prompts 18–19 already present. Added this consolidation. Recorded CE validation: four Gold tables created; segmentation and trend grains available for dashboard.
+
+**YOUR EVALUATION:**
+
+- Accepted (why): Gold SQL + orchestrator confirmed on CE after Silver.
+- Changed (why): n/a
+- Rejected (why): n/a
+
+**FINAL DECISION:** Phase 4 complete. Proceed to dashboard queries (Prompt 21) reading Gold only.
+
+
