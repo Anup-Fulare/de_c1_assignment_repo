@@ -64,4 +64,24 @@ Orchestrator chains all flag_* helpers, sets PASS/FAIL + failure reasons, writes
 
 **FINAL DECISION:** Run on Databricks after Bronze; then Prompt 17 consolidates silver prompt logs.
 
+---
+
+## Prompt 4: Consolidate Prompt 14–16 log (playbook Prompt 17)
+
+**PROMPT SENT:**
+
+Append Prompt 14–16 results into `ai-prompts/silver-layer.md` with accept/change/reject notes. Extra notes: Silver orchestrator ran successfully on Databricks Free/Community Edition after Bronze was already validated.
+
+**AI RESPONSE SUMMARY:**
+
+Entries for Prompts 14–16 were already in this file. Added this consolidation. Recorded CE validation: `create_silver_tables.py` wrote `silver.*` and quality metrics; intentional seeded issues detected; flag-only (row counts match Bronze).
+
+**YOUR EVALUATION:**
+
+- Accepted (why): History already complete; CE run confirms checks work on Spark Connect like pulled Bronze.
+- Changed (why): n/a
+- Rejected (why): n/a
+
+**FINAL DECISION:** Phase 3 complete. Proceed to Gold (Prompt 18) using Silver as source; CE/Spark Connect patterns unchanged.
+
 
