@@ -69,11 +69,15 @@ Cursor (Agent for multi-file implementation; Ask for explanations). Supporting l
 
 ## Lessons learned
 
-_Placeholders — fill after implementation (Prompt 26)._
-
 - What worked:
-  - TBD
+  - Phase-scoped prompts against a written design pack (flag-don’t-delete, exact issue counts)
+  - Local pandas tests for seeded inventory, then CE SQL counts for Silver = Bronze
+  - Logging accept / change / reject in `ai-prompts/` so the story is auditable
 - What did not work:
-  - TBD
+  - Trusting classic Spark helpers (`rdd`, `_jvm`, `dbutils.fs.ls`) on Community Edition Spark Connect
+  - Assuming FileStore paths when CSVs were in `/Workspace/Users/{user}/...`
+  - Local CSV tests passing while Spark `IntegerType` nulled FKs written as `5764.0`
 - What I would change next time:
-  - TBD
+  - Pin CE / Spark Connect constraints in `.cursorrules` before first ingest
+  - Spot-check raw CSV IDs and Spark null-FK counts before Silver
+  - One documented data path; keep real CE stack traces in `debugging-notes.md`

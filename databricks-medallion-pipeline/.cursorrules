@@ -14,7 +14,7 @@
 ## Code
 - Prefer readable, commented Python / PySpark / SQL.
 - Keep Databricks Community Edition in mind (simple paths, no proprietary extras).
-- Match filenames and schemas in ASSIGNMENT_PLAN.md / design docs.
+- Match filenames and schemas in README.md / design-notes.md / data-model.md.
 
 ## AI workflow
 - Document meaningful Cursor exchanges in ai-prompts/ (prompt, response summary, accepted/changed/rejected).

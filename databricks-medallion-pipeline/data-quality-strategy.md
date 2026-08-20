@@ -94,6 +94,30 @@ ORDER BY check_name, table_name;
 
 Silver checks must surface these counts (within how duplicates/orphans are counted) so tests can assert detection.
 
+## Results observed on Databricks CE
+
+After `create_silver_tables.py` on Community Edition (pipeline confirmed OK; Silver row counts equal Bronze):
+
+| Proof key (console) | Expected | Observed |
+|---------------------|----------:|----------|
+| customers_null_email | 50 | 50 |
+| customers_duplicate_rows_flagged | 20 | 20 |
+| orders_null_customer_id | 100 | 100 |
+| orders_null_product_id | 200 | 200 |
+| orders_orphan_customer_id | 50 | 50 |
+| orders_orphan_product_id | 30 | 30 |
+| orders_duplicate_rows_flagged | 40 | 40 |
+
+Exact `% passed` per check lives in **`silver.quality_metrics`** (overwritten each Silver run). Those percentages were not copied into git; re-query after a run:
+
+```sql
+SELECT check_name, table_name, total_rows_evaluated, failed_rows, pct_passed
+FROM silver.quality_metrics
+ORDER BY check_name, table_name;
+```
+
+Local CSV tests (`tests/test_sample_data_issues.py`, `tests/test_silver_rules_on_csv.py`) match the same inventory. Do not treat overlapping flags as additive to 700 unique rows.
+
 ## Gold feed rule (reminder)
 
 Gold uses rows that pass critical checks for join/aggregation keys; Silver retains flagged rows for transparency.

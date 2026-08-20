@@ -7,8 +7,6 @@ Sources:
 - `303de8b` — Make bronze ingestion Spark Connect-compatible and parameterized (2026-08-19)
 - `afe62eb` — Fix data generation to prevent float conversion of integer IDs (2026-08-20)
 
-Prompt 24 can append later Gold/dashboard issues the same way.
-
 ---
 
 ## Issue 1 — Spark Connect / Serverless APIs in Bronze ingest
@@ -91,3 +89,10 @@ After generating CSVs, spot-check raw file values (`5764` vs `5764.0`) and Spark
 
 - No extra fictional bugs
 - `3a7f068` (Silver modules) is implementation of Prompts 14–16, not a CE hotfix — logged under `ai-prompts/silver-layer.md`
+
+---
+
+## Prompt 24 close-out
+
+Silver, Gold, and dashboard queries ran successfully on Databricks CE with **no additional defects** beyond Issues 1–2 above. This file stands as the debugging artifact for submission.
+

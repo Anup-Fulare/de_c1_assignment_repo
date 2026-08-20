@@ -60,4 +60,5 @@ Pull `afe62eb` (“Fix data generation to prevent float conversion of integer ID
 
 ## Later issues
 
-Silver/Gold CE failures (if any) will be appended here with the same template. Silver implementation itself is in `ai-prompts/silver-layer.md` (`3a7f068`), not treated as a debug pull.
+**Playbook Prompt 24:** No further pipeline bugs after Issues 1–2. Silver, Gold, and dashboard SQL succeeded on Databricks CE. No extra entries invented.
+
