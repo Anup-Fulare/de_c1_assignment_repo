@@ -44,17 +44,30 @@
 
 ## Quality Metrics Report
 
-Present (table or printed summary) per check:
+Persisted to **`silver.quality_metrics`** by `src/silver/create_silver_tables.py` after each Silver run.
 
-| check_name | total_rows_evaluated | failed_rows | pct_passed |
-|------------|----------------------|-------------|------------|
-| completeness | … | … | … |
-| uniqueness | … | … | … |
-| type_validation | … | … | … |
-| referential_integrity | … | … | … |
-| business_logic | … | … | … |
+| check_name | table_name | total_rows_evaluated | failed_rows | pct_passed | report_ts |
+|------------|------------|----------------------|-------------|------------|-----------|
+| completeness | customers / orders | row count | flagged count | (total−failed)/total×100 | run time |
+| uniqueness | customers / orders | … | … | … | … |
+| type_validation | customers / orders / products | … | … | … | … |
+| referential_integrity | orders | … | … | … | … |
+| business_logic | customers / orders | … | … | … | … |
 
-Also show overall PASS/FAIL row counts on Silver fact/dimension tables as applicable.
+**Console output** also prints:
+- Per-table Silver row counts and FAIL row counts
+- `silver.quality_metrics` contents (`show`)
+- **Intentional issue detection proof** — compares actual counts to seeded inventory (50 null emails, 20 dup customer rows flagged, etc.)
+
+**Overall Silver row result:** `quality_check_result` = PASS only if all applicable `flag_*` columns are false; otherwise FAIL with `quality_failure_reasons` (pipe-separated check codes).
+
+Example query after run:
+
+```sql
+SELECT check_name, table_name, failed_rows, pct_passed
+FROM silver.quality_metrics
+ORDER BY check_name, table_name;
+```
 
 ## Sample Data Quality Issues (intentional inventory)
 

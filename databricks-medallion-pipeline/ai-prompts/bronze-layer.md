@@ -43,3 +43,24 @@ Added `ingest_all.py` calling `ingest_customers` → `ingest_orders` → `ingest
 - Rejected (why): n/a
 
 **FINAL DECISION:** Keep ingest_all.py as the Bronze entrypoint.
+
+---
+
+## Prompt 3: Consolidate Prompt 11–12 log (playbook Prompt 13)
+
+**PROMPT SENT:**
+
+Append Prompt 11–12 results into `ai-prompts/bronze-layer.md` with accept/change/reject notes. Extra notes: latest pull updated Bronze files for Databricks Free/Community Edition (Spark Connect) compatibility; future prompts should follow those patterns.
+
+**AI RESPONSE SUMMARY:**
+
+Prompts 11–12 already had full entries. Added this consolidation. Recorded CE compatibility from the pulled code as the reference for later layers: no JVM/`dbutils.fs` path checks; `df.limit(1).count()` instead of `rdd.isEmpty()`; auto-detect Workspace user path (`/Workspace/Users/{user}/.../databricks-medallion-pipeline/data`); widgets as optional override.
+
+**YOUR EVALUATION:**
+
+- Accepted (why): Bronze history is complete; pulled CE patterns are the compatibility baseline going forward.
+- Changed (why): After Databricks testing, ingest scripts dropped Spark Connect-incompatible validation (`dbutils`/`rdd`); kept raw ingest and `bronze.*` table names.
+- Rejected (why): n/a
+
+**FINAL DECISION:** Phase 2 prompt history complete. Implement Silver (Prompt 14+) using the pulled Bronze style as the CE reference.
+
