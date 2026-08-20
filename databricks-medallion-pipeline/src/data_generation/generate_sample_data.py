@@ -119,7 +119,12 @@ def generate_products(rng: random.Random) -> pd.DataFrame:
                 "reorder_level": rng.randint(10, 200),
             }
         )
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    # Use nullable Int64 dtype to prevent float conversion
+    df["product_id"] = df["product_id"].astype("Int64")
+    df["stock_quantity"] = df["stock_quantity"].astype("Int64")
+    df["reorder_level"] = df["reorder_level"].astype("Int64")
+    return df
 
 
 def generate_customers(rng: random.Random) -> pd.DataFrame:
@@ -143,6 +148,9 @@ def generate_customers(rng: random.Random) -> pd.DataFrame:
             }
         )
     df = pd.DataFrame(rows)
+    
+    # Convert integer columns to nullable Int64 dtype
+    df["customer_id"] = df["customer_id"].astype("Int64")
 
     # --- Intentional issues: NULL email (completeness) ---
     null_email_idx = rng.sample(range(len(df)), NULL_EMAILS)
@@ -205,6 +213,13 @@ def generate_orders(
             }
         )
     df = pd.DataFrame(rows)
+    
+    # Convert integer columns to nullable Int64 dtype to prevent float conversion when NAs are added
+    # This ensures integers are written as "5764" not "5764.0" in CSV
+    df["order_id"] = df["order_id"].astype("Int64")
+    df["customer_id"] = df["customer_id"].astype("Int64")
+    df["product_id"] = df["product_id"].astype("Int64")
+    df["quantity"] = df["quantity"].astype("Int64")
 
     # Disjoint index slices for intentional issues
     idx = list(range(len(df)))
