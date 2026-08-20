@@ -96,7 +96,7 @@ Silver checks must surface these counts (within how duplicates/orphans are count
 
 ## Results observed on Databricks CE
 
-After `create_silver_tables.py` on Community Edition (pipeline confirmed OK; Silver row counts equal Bronze):
+After `create_silver_tables.py` on Free/Community Edition (pipeline confirmed OK; Silver row counts equal Bronze):
 
 | Proof key (console) | Expected | Observed |
 |---------------------|----------:|----------|
