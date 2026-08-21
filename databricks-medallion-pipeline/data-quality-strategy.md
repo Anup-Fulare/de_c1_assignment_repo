@@ -108,15 +108,28 @@ After `create_silver_tables.py` on Free/Community Edition (pipeline confirmed OK
 | orders_orphan_product_id | 30 | 30 |
 | orders_duplicate_rows_flagged | 40 | 40 |
 
-Exact `% passed` per check lives in **`silver.quality_metrics`** (overwritten each Silver run). Those percentages were not copied into git; re-query after a run:
+**`silver.quality_metrics` on CE** (same SQL as below). Export: [`database/data_quality_metrics_result.csv`](database/data_quality_metrics_result.csv). Completeness on orders **300** = 100 + 200 null FKs. Referential integrity **80** = 50 + 30 orphans.
 
 ```sql
-SELECT check_name, table_name, total_rows_evaluated, failed_rows, pct_passed
+SELECT check_name, table_name, failed_rows, pct_passed
 FROM silver.quality_metrics
 ORDER BY check_name, table_name;
 ```
 
-Local CSV tests (`tests/test_sample_data_issues.py`, `tests/test_silver_rules_on_csv.py`) match the same inventory. Do not treat overlapping flags as additive to 700 unique rows.
+| check_name | table_name | failed_rows | pct_passed |
+|------------|------------|------------:|-----------:|
+| business_logic | customers | 0 | 100 |
+| business_logic | orders | 0 | 100 |
+| completeness | customers | 50 | 99.5005 |
+| completeness | orders | 300 | 99.7 |
+| referential_integrity | orders | 80 | 99.92 |
+| type_validation | customers | 0 | 100 |
+| type_validation | orders | 0 | 100 |
+| type_validation | products | 0 | 100 |
+| uniqueness | customers | 20 | 99.8002 |
+| uniqueness | orders | 40 | 99.96 |
+
+`pct_passed` is overwritten on each Silver run. Local CSV tests (`tests/test_sample_data_issues.py`, `tests/test_silver_rules_on_csv.py`) match the same inventory. Do not treat overlapping flags as additive to 700 unique rows.
 
 ## Gold feed rule (reminder)
 

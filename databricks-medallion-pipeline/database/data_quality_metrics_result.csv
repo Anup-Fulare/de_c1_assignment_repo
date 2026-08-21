@@ -1,0 +1,11 @@
+check_name,table_name,failed_rows,pct_passed
+business_logic,customers,0,100
+business_logic,orders,0,100
+completeness,customers,50,99.5005
+completeness,orders,300,99.7
+referential_integrity,orders,80,99.92
+type_validation,customers,0,100
+type_validation,orders,0,100
+type_validation,products,0,100
+uniqueness,customers,20,99.8002
+uniqueness,orders,40,99.96

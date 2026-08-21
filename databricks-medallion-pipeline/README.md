@@ -192,7 +192,9 @@ FROM silver.quality_metrics
 ORDER BY check_name, table_name;
 ```
 
-Dashboard sanity (after Gold): Q1 returns **10** rows; Q3 typically **four** segment types. Strategy write-up: `data-quality-strategy.md`.
+CE sample export (failed_rows / pct_passed): [`database/data_quality_metrics_result.csv`](database/data_quality_metrics_result.csv). Full write-up: `data-quality-strategy.md`.
+
+Dashboard sanity (after Gold): Q1 returns **10** rows; Q3 typically **four** segment types.
 
 ---
 
@@ -213,7 +215,7 @@ databricks-medallion-pipeline/
   requirements.txt
   .cursorrules
   data/                          # generated CSVs
-  database/                      # schema.sql, setup-notes, seed-data-notes
+  database/                      # schema.sql, setup-notes, seed-data-notes, CE quality_metrics export
   src/data_generation/           # generate_sample_data.py
   src/bronze/                    # ingest scripts + ingest_all.py
   src/silver/                    # quality 01–05 + create_silver_tables.py
