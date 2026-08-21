@@ -69,8 +69,8 @@ An e-commerce company needs a Databricks medallion pipeline for daily sales data
 - Invalid or future dates, invalid `order_status` / `customer_segment` values
 - Empty or missing source files at ingest time
 
-## Clarifications Needed
+## Clarifications resolved
 
-- Exact DBFS base path naming convention preferred for this CE workspace (to be finalized in setup notes)
-- Whether Gold should treat “Inactive” as zero completed orders in the sample window only, or include cancelled-only customers (to be locked in design-notes / segmentation SQL)
-- Submission form deadline / final submission date (currently TBD in candidate-info)
+- **CSV / DBFS path:** On Free/Community Edition, Bronze ingest reads CSVs from the Workspace repo `.../databricks-medallion-pipeline/data/` (see README). Optional FileStore path: `/FileStore/medallion_pipeline/data` via `ingest_all` `data_dir` or per-file `source_path` widgets.
+- **Inactive:** Gold treats Inactive as **0 completed orders** in this dataset, including cancelled-only and never-completed customers (`src/gold/04_customer_segmentation.sql`).
+- **Submission date:** **2026-08-21** (`candidate-info.md`).

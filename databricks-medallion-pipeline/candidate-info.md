@@ -6,7 +6,7 @@
 **Primary AI Tool Used:** Cursor  
 **Project Option Selected:** Data Pipeline (Medallion Architecture)  
 **Assessment Start Date:** 2026-08-13  
-**Submission Date:** TBD  
+**Submission Date:** 2026-08-21  
 
 ## Tools & Environment
 
