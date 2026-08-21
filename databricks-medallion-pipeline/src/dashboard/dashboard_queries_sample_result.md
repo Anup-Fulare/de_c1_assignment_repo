@@ -2,8 +2,7 @@
 
 Below are the actual queries executed against the Gold layer with their results and visualization configurations.
 
-> **Note:** Interactive visualizations are available in the notebook: [`notebook_ttn_c1_assignment_validaton`](../../notebook_ttn_c1_assignment_validaton) (Cells 31-36). Screenshots of the chart outputs are provided below each query for reference.
-(https://dbc-45b81f48-7e70.cloud.databricks.com/editor/notebooks/381239961230379?o=7474659564643909)
+> **Note:** Interactive visualizations are available in the notebook: [`notebook_ttn_c1_assignment_validaton`](https://dbc-45b81f48-7e70.cloud.databricks.com/editor/notebooks/381239961230379?o=7474659564643909) (Cells 31-36). Screenshots of the chart outputs are provided below each query for reference.
 
 ### Query 1: Show Gold Tables
 ```sql
@@ -179,8 +178,7 @@ These queries form the foundation for a comprehensive e-commerce analytics dashb
 
 To complete the documentation, add actual chart screenshots:
 
-1. Open the notebook: [`notebook_ttn_c1_assignment_validaton`](../../notebook_ttn_c1_assignment_validaton)
-(https://dbc-45b81f48-7e70.cloud.databricks.com/editor/notebooks/381239961230379?o=7474659564643909)
+1. Open the notebook: [`notebook_ttn_c1_assignment_validaton`](https://dbc-45b81f48-7e70.cloud.databricks.com/editor/notebooks/381239961230379?o=7474659564643909)
 2. Navigate to cells 31-36 (each contains one of the queries above)
 3. Capture screenshots of the visualization output for each cell
 4. Save screenshots to: `src/dashboard/screenshots/`
