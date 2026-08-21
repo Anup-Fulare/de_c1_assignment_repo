@@ -1,6 +1,6 @@
 # Task breakdown for Cursor
 
-Ordered tasks aligned to `ASSIGNMENT_PLAN.md` / `ASSIGNMENT_PROMPTS.md`. Confirm before each run; log after.
+Ordered tasks aligned to `ASSIGNMENT_PLAN.md`. Confirm before each run; log after.
 
 ## Phase 0 — Foundation
 

@@ -3,7 +3,7 @@
 ## Files
 
 - Primary rules: `databricks-medallion-pipeline/.cursorrules`
-- Walkthrough discipline: local `ASSIGNMENT_PROMPTS.md` + `ASSIGNMENT_PROMPT_PROGRESS.md` (gitignored)
+- Walkthrough discipline: local `ASSIGNMENT_PLAN.md`(gitignored)
 
 ## What `.cursorrules` enforces
 
